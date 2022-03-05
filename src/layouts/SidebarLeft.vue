@@ -75,7 +75,7 @@ import { useStore } from 'src/store'
 export default defineComponent({
   name: 'SidebarLeft',
   computed: {
-    ...mapGetters('showcase', ['leftSidebarMini']),
+    ...mapGetters('persistedCookie', ['leftSidebarMini']),
   },
   setup() {
     const $store = useStore(),

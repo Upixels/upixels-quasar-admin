@@ -1,10 +1,10 @@
 export interface PersistedStateInterface {
-  prop: boolean
+  leftSidebarMini: boolean
 }
 
 function state(): PersistedStateInterface {
   return {
-    prop: false,
+    leftSidebarMini: false,
   }
 }
 

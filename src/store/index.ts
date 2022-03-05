@@ -1,11 +1,11 @@
 import { store } from 'quasar/wrappers'
 import { InjectionKey } from 'vue'
 import { createStore, Store as VuexStore, useStore as vuexUseStore } from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
+// import createPersistedState from 'vuex-persistedstate'
 
 import showcase from './showcase'
 import { ShowcaseStateInterface } from './showcase/state'
-import { PersistedStateInterface } from './persisted-local/state'
+import { PersistedStateInterface as PersistedLocalStateInterface } from './persisted-local/state'
 import persistedLocal from './persisted-local'
 
 /*
@@ -23,7 +23,7 @@ export interface StateInterface {
   // Declared as unknown to avoid linting issue. Best to strongly type as per the line above.
   example: unknown
   showcase: ShowcaseStateInterface
-  persisted: PersistedStateInterface
+  persistedLocal: PersistedLocalStateInterface
 }
 
 // provide typings for `this.$store`
@@ -40,6 +40,7 @@ export const storeKey: InjectionKey<VuexStore<StateInterface>> =
 export enum Modules {
   SHOWCASE = 'showcase',
   PERSISTED_LOCAL = 'persistedLocal',
+  PERSISTED_COOKIE = 'persistedCookie',
 }
 
 export default store(function (/* { ssrContext } */) {
@@ -53,10 +54,10 @@ export default store(function (/* { ssrContext } */) {
     // for dev mode and --debug builds only
     strict: !!process.env.DEBUGGING,
     plugins: [
-      createPersistedState({
-        key: 'uPixelsPersisted',
-        paths: ['persisted'],
-      }),
+      // createPersistedState({
+      //   key: 'uPixelsPersistedLocal',
+      //   paths: ['persistedLocal'],
+      // }),
     ],
   })
 

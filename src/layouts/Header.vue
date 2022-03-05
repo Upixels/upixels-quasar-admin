@@ -14,7 +14,7 @@
         round
         icon="menu"
         aria-label="Menu"
-        @click="$store.commit('showcase/TOGGLE_MINI_SIDEBAR')"
+        @click="$store.commit('persistedCookie/TOGGLE_MINI_SIDEBAR')"
       />
 
       <img
