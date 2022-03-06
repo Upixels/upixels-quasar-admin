@@ -8,6 +8,7 @@ export interface ShowcaseStateInterface {
   dialog: DialogInterface
   parentDialogs: Array<string>
   properties: LooseObject
+  sidebarLeft: boolean
   leftSidebarMini: boolean
   liteModeEnable: boolean
   direction: string
@@ -18,6 +19,7 @@ function state(): ShowcaseStateInterface {
     dialog: {},
     parentDialogs: [],
     properties: {},
+    sidebarLeft: false,
     leftSidebarMini: false,
     liteModeEnable: false,
     direction: 'ltr',

@@ -30,6 +30,19 @@
       />
 
       <q-expansion-item
+        icon="category"
+        label="Category"
+        expand-icon="none"
+        to="/category"
+        exact
+        :active-class="
+          $q.dark.isActive
+            ? 'bg-blue-grey-8 text-white'
+            : 'bg-indigo-6 text-white'
+        "
+      />
+
+      <q-expansion-item
         icon="person"
         label="Users"
         expand-icon="none"
@@ -68,7 +81,6 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
 import { mapGetters } from 'vuex'
-
 import { useQuasar } from 'quasar'
 import { useStore } from 'src/store'
 
@@ -79,14 +91,20 @@ export default defineComponent({
   },
   setup() {
     const $store = useStore(),
-      $q = useQuasar()
+      $q = useQuasar(),
+      dialogState = computed({
+        get: () => $store.state.showcase.sidebarLeft,
+        set: () => {
+          $store.commit('showcase/TOGGLE_SIDEBAR')
+        },
+      })
+
     return {
-      dialogState: ref(false),
+      dialogState,
       miniState: ref(true),
       themeType: computed(() => {
         if ($q.dark.isActive) return 'dark'
         else if ($store.state.showcase.liteModeEnable) return 'lite'
-
         return 'semidark'
       }),
     }

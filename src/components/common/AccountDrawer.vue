@@ -24,9 +24,9 @@
               </q-item-section>
 
               <q-item-section class="items-start">
-                <q-item-label class="text-weight-bold"
-                  >Rahil Menon</q-item-label
-                >
+                <q-item-label class="text-weight-bold">
+                  Rahil Menon
+                </q-item-label>
                 <q-item-label caption> Admin </q-item-label>
                 <q-btn
                   unelevated

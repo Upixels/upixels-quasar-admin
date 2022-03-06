@@ -1,12 +1,16 @@
 import { store } from 'quasar/wrappers'
 import { InjectionKey } from 'vue'
 import { createStore, Store as VuexStore, useStore as vuexUseStore } from 'vuex'
-// import createPersistedState from 'vuex-persistedstate'
+import { Cookies } from 'quasar'
+import createPersistedState from 'vuex-persistedstate'
 
 import showcase from './showcase'
 import { ShowcaseStateInterface } from './showcase/state'
 import { PersistedStateInterface as PersistedLocalStateInterface } from './persisted-local/state'
+import { PersistedStateInterface as PersistedCookieStateInterface } from './persisted-cookie/state'
+
 import persistedLocal from './persisted-local'
+import persistedCookie from './persisted-cookie'
 
 /*
  * If not building with SSR mode, you can
@@ -24,6 +28,7 @@ export interface StateInterface {
   example: unknown
   showcase: ShowcaseStateInterface
   persistedLocal: PersistedLocalStateInterface
+  persistedCookie: PersistedCookieStateInterface
 }
 
 // provide typings for `this.$store`
@@ -43,21 +48,35 @@ export enum Modules {
   PERSISTED_COOKIE = 'persistedCookie',
 }
 
-export default store(function (/* { ssrContext } */) {
+export default store(function ({ ssrContext }) {
+  const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies,
+    options = { path: '/', expires: 1 },
+    cookieStorage = {
+      getItem: (key: string) => JSON.stringify(cookies.get(key)),
+      setItem: (key: string, value: string) => cookies.set(key, value, options),
+      removeItem: (key: string) => cookies.remove(key),
+    }
+
   const Store = createStore<StateInterface>({
     modules: {
       [Modules.SHOWCASE]: showcase,
       [Modules.PERSISTED_LOCAL]: persistedLocal,
+      [Modules.PERSISTED_COOKIE]: persistedCookie,
     },
 
     // enable strict mode (adds overhead!)
     // for dev mode and --debug builds only
     strict: !!process.env.DEBUGGING,
     plugins: [
-      // createPersistedState({
-      //   key: 'uPixelsPersistedLocal',
-      //   paths: ['persistedLocal'],
-      // }),
+      createPersistedState({
+        key: 'uPixelsPersistedLocal',
+        paths: ['persistedLocal'],
+      }),
+      createPersistedState({
+        key: 'uPixelsPersistedCookie',
+        paths: ['persistedCookie'],
+        storage: cookieStorage,
+      }),
     ],
   })
 

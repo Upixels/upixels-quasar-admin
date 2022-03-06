@@ -14,7 +14,12 @@
         round
         icon="menu"
         aria-label="Menu"
-        @click="$store.commit('persistedCookie/TOGGLE_MINI_SIDEBAR')"
+        @click="
+          () => {
+            if ($q.platform.is.mobile) $store.commit('showcase/TOGGLE_SIDEBAR')
+            else $store.commit('persistedCookie/TOGGLE_MINI_SIDEBAR')
+          }
+        "
       />
 
       <img
@@ -66,21 +71,11 @@
                   </q-avatar>
                 </q-item-section>
 
-                <q-item-section class="">
-                  <q-item-label class="text-weight-bold"
-                    >Rahil Menon</q-item-label
-                  >
+                <q-item-section>
+                  <q-item-label class="text-weight-bold">
+                    Rahil Menon
+                  </q-item-label>
                   <q-item-label caption> Admin </q-item-label>
-                  <!-- <q-btn
-                    unelevated
-                    :color="$q.dark.isActive ? ' bg-red-5 ' : 'red'"
-                    class="q-mt-sm q-px-md"
-                    dense
-                    no-caps
-                    @click="$router.push('/login')"
-                  >
-                    Logout
-                  </q-btn> -->
                 </q-item-section>
               </q-item>
             </q-card>
@@ -96,23 +91,57 @@
                 :class="$q.dark.isActive ? 'bg-blue-grey-8' : 'bg-grey-3'"
               />
               <q-item clickable>
-                <q-item-section>Language</q-item-section>
+                <q-item-section
+                  class="items-center"
+                  style="flex-direction: row; justify-content: start"
+                >
+                  <span> Language </span>
+                  <q-badge flat class="q-ml-md q-pa-sm bg-grey-2 text-black">
+                    <!-- <q-icon name="warning" color="white" class="q-mr-xs" /> -->
+                    English
+                    <q-img
+                      src="~assets/united-states.svg"
+                      class="q-ml-sm rounded-borders"
+                      style="width: 15px; height: 15px"
+                    />
+                  </q-badge>
+                </q-item-section>
                 <q-item-section side>
                   <q-icon name="keyboard_arrow_right" />
                 </q-item-section>
 
                 <q-menu anchor="top end" self="top start">
                   <q-list style="min-width: 150px">
-                    <q-item v-for="n in 3" :key="n" dense clickable>
-                      <q-item-section>English</q-item-section>
-
-                      <!-- <q-menu auto-close anchor="top end" self="top start">
-                        <q-list>
-                          <q-item v-for="n in 3" :key="n" dense clickable>
-                            <q-item-section>3rd level Label</q-item-section>
-                          </q-item>
-                        </q-list>
-                      </q-menu> -->
+                    <q-item clickable v-close-popup>
+                      <q-item-section
+                        class="items-center"
+                        style="flex-direction: row; justify-content: start"
+                      >
+                        <q-img
+                          src="~assets/united-states.svg"
+                          class="q-mr-sm rounded-borders"
+                          style="width: 15px; height: 15px"
+                        />
+                        English
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                  <q-separator
+                    :class="$q.dark.isActive ? 'bg-blue-grey-8' : 'bg-grey-3'"
+                  />
+                  <q-list style="min-width: 150px">
+                    <q-item clickable v-close-popup>
+                      <q-item-section
+                        class="items-center"
+                        style="flex-direction: row; justify-content: start"
+                      >
+                        <q-img
+                          src="~assets/france.svg"
+                          class="q-mr-sm rounded-borders"
+                          style="width: 15px; height: 15px"
+                        />
+                        France
+                      </q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>
@@ -121,9 +150,9 @@
                 :class="$q.dark.isActive ? 'bg-blue-grey-8' : 'bg-grey-3'"
               />
               <q-item clickable v-close-popup>
-                <q-item-section @click="$router.push('/login')"
-                  >Logout</q-item-section
-                >
+                <q-item-section @click="$router.push('/login')">
+                  Logout
+                </q-item-section>
               </q-item>
             </q-list>
           </q-menu>

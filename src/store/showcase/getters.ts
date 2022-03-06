@@ -17,6 +17,9 @@ const getters: GetterTree<ShowcaseStateInterface, StateInterface> = {
   leftSidebarMini(state) {
     return state.leftSidebarMini
   },
+  sidebarLeft(state) {
+    return state.sidebarLeft
+  },
   liteModeEnable(state) {
     return state.liteModeEnable
   },

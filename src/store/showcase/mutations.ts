@@ -65,6 +65,9 @@ const mutation: MutationTree<ShowcaseStateInterface> = {
   SET_DIRECTION(state: ShowcaseStateInterface, direction: string) {
     state.direction = direction
   },
+  TOGGLE_SIDEBAR(state: ShowcaseStateInterface) {
+    state.sidebarLeft = !state.sidebarLeft
+  },
 }
 
 export default mutation
