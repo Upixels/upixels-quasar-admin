@@ -181,7 +181,7 @@
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  name: 'Header',
+  name: 'App-Header',
   setup() {
     return {
       drawerRight: ref(false),

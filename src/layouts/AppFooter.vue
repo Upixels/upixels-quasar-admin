@@ -18,7 +18,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Footer',
+  name: 'App-Footer',
   setup() {
     const cYear = new Date().getFullYear()
 

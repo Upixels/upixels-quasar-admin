@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHr lpR lFf">
-    <Header />
+    <app-header />
     <SidebarLeft />
     <SidebarRight />
 
@@ -35,7 +35,7 @@
 
     <ThemeCustomizer />
     <AccountDrawer />
-    <Footer />
+    <app-footer />
   </q-layout>
 </template>
 
@@ -43,8 +43,8 @@
 import { defineComponent, computed } from 'vue'
 import { useStore } from 'src/store'
 
-import Footer from './Footer.vue'
-import Header from './Header.vue'
+import AppFooter from './AppFooter.vue'
+import AppHeader from './AppHeader.vue'
 import SidebarLeft from './SidebarLeft.vue'
 import SidebarRight from './SidebarRight.vue'
 import SidebarRightMini from './SidebarRightMini.vue'
@@ -60,11 +60,11 @@ export default defineComponent({
     }
   },
   components: {
-    Header,
+    AppHeader,
     SidebarLeft,
     SidebarRight,
     SidebarRightMini,
-    Footer,
+    AppFooter,
     ThemeCustomizer,
     AccountDrawer,
   },

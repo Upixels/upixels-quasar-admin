@@ -59,13 +59,13 @@
         </q-table>
       </q-card>
     </div>
-    <Form />
+    <category-form />
   </q-page>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Form from './Form.vue'
+import CategoryForm from './Form.vue'
 
 const columns = [
   {
@@ -195,7 +195,7 @@ const rows = [
 
 export default defineComponent({
   name: 'PageCategory',
-  components: { Form },
+  components: { CategoryForm },
   setup() {
     return {
       columns,
